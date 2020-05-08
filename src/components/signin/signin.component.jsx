@@ -19,7 +19,7 @@ class Signin extends React.Component {
         const { email, password} = this.state;
 
         try {
-            await auth.signInWithEmailAndPassword(email, password)
+            await auth.signInWithEmailAndPassword(email, password);
             this.setState({
                 email:"",
                 password: ""
@@ -36,7 +36,6 @@ class Signin extends React.Component {
         const { value, name} = event.target;
 
         this.setState({[name]: value});
-        console.log(this.state)
     }
 
     render() {
