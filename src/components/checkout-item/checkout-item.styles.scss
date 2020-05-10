@@ -16,6 +16,17 @@
       height: 100%;
     }
   }
+  .quantity {
+    display: flex;
+
+    .arrow {
+      display: cursor;
+    }
+
+    .value {
+      margin: 0 10px;
+    }
+  }
   .name,
   .quantity,
   .price {
