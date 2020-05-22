@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import { batch } from 'react-redux';
 
 const  config = {
     apiKey: "AIzaSyAHREWn_Q6D5lYxUsuCdcVkt1hnhlA2KgU",
@@ -50,4 +51,19 @@ export  const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
   return userRef;
+}
+
+
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectsToAdd 
+  ) => {
+    const collectionRef = firestore.collection(collectionKey);
+    const batch = firestore.batch();
+    objectsToAdd.forEach(object  => {
+      const newDocRef = collectionRef.doc();
+      batch.set(newDocRef, object);
+    })
+
+   return await batch.commit();
 }
