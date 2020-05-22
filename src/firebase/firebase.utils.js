@@ -67,3 +67,22 @@ export const addCollectionsAndDocuments = async (
 
    return await batch.commit();
 }
+
+
+export const convertCollectionsSnapshotToMap = ( collections) => {
+  const tranformedCollection = collections.docs.map( doc => {
+    const {title, items} = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    }
+  });
+  console.log(tranformedCollection);
+
+  return tranformedCollection.reduce((accumulator, collection) =>{
+     accumulator[collection.title.toLowerCase()] = collection;
+     return accumulator;
+  }, {});
+}
