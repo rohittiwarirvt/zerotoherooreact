@@ -15,7 +15,6 @@ const customButtonStyles = css`
 
 
  const getCustomButtonStyles = props => {
-  console.log(props)
   if (props.isGoogleSignIn) {
     return googleSigninStyles;
   }

@@ -25,11 +25,7 @@ export const fetchCollectionStartAsync = () => {
 		
 		collectionRef.get().then(async snapShot => {
       dispatch(fetchCollectionStart());
-      console.log(snapShot);
       const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
-      
-      console.log(collectionsMap);
-
       
       dispatch(fetchCollectionSuccess(collectionsMap));
 
