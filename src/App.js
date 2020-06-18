@@ -9,7 +9,7 @@ import Header from './components/header/header.component';
 import SigninSignupPage from './pages/signin-signup-page/signin-signup-page.component';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import CheckoutPage from './pages/checkout/checkout.component';
-import {checkUserSession} from './redux/user/user.actions';
+import { checkUserSession } from './redux/user/user.actions';
 
 class  App extends React.Component {
 
