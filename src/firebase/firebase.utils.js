@@ -11,7 +11,7 @@ const  config = {
     storageBucket: "rohit-ecommerce.appspot.com",
     messagingSenderId: "397818556545",
     appId: "1:397818556545:web:5f94c684e5ded2e2665d80",
-    measurementId: "G-FVH44RRZC1"    
+    measurementId: "G-FVH44RRZC1"
 }
 
 
@@ -54,7 +54,7 @@ export  const createUserProfileDocument = async (userAuth, additionalData) => {
 
 export const addCollectionsAndDocuments = async (
   collectionKey,
-  objectsToAdd 
+  objectsToAdd
   ) => {
     const collectionRef = firestore.collection(collectionKey);
     const batch = firestore.batch();
@@ -82,4 +82,13 @@ export const convertCollectionsSnapshotToMap = ( collections) => {
      accumulator[collection.title.toLowerCase()] = collection;
      return accumulator;
   }, {});
+}
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged( userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 }
