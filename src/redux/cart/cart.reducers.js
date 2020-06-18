@@ -10,7 +10,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case CartActionTypes.TOGGLE_CART_HIDDEN:
             return {
-                ...state, 
+                ...state,
                 hidden: !state.hidden
             }
             break;
@@ -31,10 +31,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: clearItemFromCartUtil(state.cartItems, action.payload)
             }
+        case CartActionTypes.CLEAR_CART:
+                return {
+                    ...state,
+                    cartItems: []
+                }
         default:
             return state;
             break;
-        
+
     }
 }
 
