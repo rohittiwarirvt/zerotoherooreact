@@ -18,3 +18,7 @@ export const clearItemFromCart = item => ({
 export const toggleCartHidden = () => ({
   type: CartActionTypes.TOGGLE_CART_HIDDEN
 });
+
+export const clearCart = () => ({
+  type: CartActionTypes.CLEAR_CART
+});

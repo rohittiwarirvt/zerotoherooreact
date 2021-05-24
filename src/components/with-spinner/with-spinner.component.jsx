@@ -3,7 +3,6 @@ import './with-spinner.styles.scss';
 
 const WithSpinner = WrappedComponent => {
   const Spinner = ({isLoading, ...otherProps}) => {
-    debugger;
 
     return isLoading ? (
       <div className='spinner-overlay'>

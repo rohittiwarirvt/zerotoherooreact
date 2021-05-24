@@ -10,40 +10,24 @@ import SignInAndSignUpPage from './pages/signin-and-signup/signin-and-signup.com
 import CheckoutPage from './pages/checkout-page/checkout-page.component';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
-import { setCurrentUser } from './redux/user/user.actions';
+import { checkUserSession } from './redux/user/user.actions';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import './App.css';
-import { createUserProfileDocument, auth, addCollectionAndDocuments } from './firebase/firebase.utils';
 
 class App extends React.Component {
 
-  unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, getCollectionForAddingToFirebase } = this.props;
+    const { checkUserSession, getCollectionForAddingToFirebase } = this.props;
+    checkUserSession();
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot( snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-        setCurrentUser(userAuth);
-      }
-    });
 
     // Code to add colleciton to Firestore
     //console.log(getCollectionForAddingToFirebase);
     //addCollectionAndDocuments('collections', getCollectionForAddingToFirebase.map( ({title, items}) => ({title, items})));
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+
 
   render() {
     return (
@@ -69,7 +53,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
